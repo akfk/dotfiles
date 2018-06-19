@@ -8,32 +8,89 @@ endif
 
 "NeoBundleFetch 'Shougo/neobundle.vim'
 
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'takiyu/tango-lx'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'nanotech/jellybeans.vim'
 
-call neobundle#end()
-
-filetype plugin indent on
-
-colorscheme tango_lx
 
 set autoindent
 set smartindent
 set smarttab
-set expandtab
-
 
 set number
 set title
 set showmatch
 
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set softtabstop=0
+set expandtab
 
 set colorcolumn=80
 
+set backspace=indent,eol,start
 set wrapscan
+
+
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+
+"===colorscheme===
+NeoBundle 'takiyu/tango-lx'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'tomasr/molokai'
+
+"===completement===
+"NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Shougo/vimproc.vim',  {
+            \ 'build' : {
+            \ 'windows' : 'make -f make_mingw32.mak',
+            \ 'cygwin' : 'make -f make_cygwin.mak',
+            \ 'mac' : 'make -f make_mac.mak',
+            \ 'unix' : 'make -f make_unix.mak',
+            \ },
+            \ }
+NeoBundle 'Shougo/neoinclude.vim'
+
+
+
+"===C++===
+NeoBundleLazy 'vim-jp/cpp-vim',{'autoload ' : {'filetypes':['cpp']}}
+NeoBundle 'justmao945/vim-clang',{'autoload' : {'filetypes':['cpp']}}
+
+"===Python===
+NeoBundleLazy 'davidhalter/jedi-vim',{'autoload' : {'filetypes':['python']}}
+
+call neobundle#end()
+
+filetype plugin indent on
+syntax on
+
+autocmd FileType c      setlocal sw=2 sts=2 ts=2 et
+autocmd FileType cpp    setlocal sw=2 sts=2 ts=2 et
+autocmd FileType python3     setlocal sw=4 sts=4 ts=4 et
+
+set background=dark
+colorscheme hybrid  
+
+"===vim-indent-guides===
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_start_level=2
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuideOdd guibg=#262626 ctermbg=gray
+autocmd VimEnter,Colorscheme * :hi IndentGuideEven guibg=#3c3c3c ctermbg=darkgray
+let g:indent_guides_color_change_percent = 30
+let g:indent_guides_guide_size = 1
+
+"===neocomplete===
+"let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#max_list = 50
+"let g:neocomlete#max_keyword_width = 80
+"let g:neocomplete#enable_ignore_case = 1
+
+"===vim-clang===
+let g:clang_c_options='-std=c11'
+let g:clang_cpp_options='-std=c++11 -pedantic-errors'
+let g:clang_format_auto=1
+let g:clang_format_style='LLVM'
+let g:clang_check_syntax_auto=1
+
