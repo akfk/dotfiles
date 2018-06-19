@@ -13,6 +13,6 @@ ln -s $PWD/.vimrc $HOME
 
 # Install NeoBundle
 echo "Install NeoBundle"
-git clone https://github/Shougo/neobundle.vim $PWD/.vim/bundle/neobundle.vim
+git clone https://github.com/Shougo/neobundle.vim $PWD/.vim/bundle/neobundle.vim
 
 echo "Please run vim."
