@@ -28,10 +28,23 @@ set colorcolumn=80
 set backspace=indent,eol,start
 set wrapscan
 
+set statusline=%F
+set statusline+=%m
+set statusline+=%r
+set statusline+=%h
+set statusline+=%w
+set statusline+=%=
+set statusline+=[ENC=%{&fileencoding}]
+set statusline+=[LOW=%l/%L]
+set laststatus=2
+
 
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+
+"===jump between blocks with % ===
+:source $VIMRUNTIME/macros/matchit.vim
 
 "===colorscheme===
 NeoBundle 'takiyu/tango-lx'
@@ -50,7 +63,7 @@ NeoBundle 'Shougo/vimproc.vim',  {
             \ },
             \ }
 NeoBundle 'Shougo/neoinclude.vim'
-
+NeoBundle 'scrooloose/syntastic'
 
 
 "===C++===
@@ -69,8 +82,13 @@ autocmd FileType c      setlocal sw=2 sts=2 ts=2 et
 autocmd FileType cpp    setlocal sw=2 sts=2 ts=2 et
 autocmd FileType python3     setlocal sw=4 sts=4 ts=4 et
 
+if exists('+termguicolors')
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	set termguicolors
+endif
 set background=dark
-colorscheme hybrid  
+colorscheme jellybeans 
 
 "===vim-indent-guides===
 let g:indent_guides_enable_on_vim_startup=1
@@ -93,4 +111,15 @@ let g:clang_cpp_options='-std=c++11 -pedantic-errors'
 let g:clang_format_auto=1
 let g:clang_format_style='LLVM'
 let g:clang_check_syntax_auto=1
+
+"===syntastic===
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 
